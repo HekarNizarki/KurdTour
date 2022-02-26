@@ -1,7 +1,4 @@
 import 'package:KurdTour/home_Splash/new.dart';
-import 'package:KurdTour/home_main/home_screen_main.dart';
-import 'package:KurdTour/registar/login.dart';
-import 'package:KurdTour/registar/signup.dart';
 import 'package:flutter/material.dart';
 
 import 'home_main/home_bottom.dart';

@@ -1,11 +1,6 @@
 import 'dart:async';
-
-import 'package:KurdTour/home_main/home_bottom.dart';
 import 'package:KurdTour/registar/login.dart';
-
 import 'package:flutter/material.dart';
-
-import '../locationDetiles/locationdetiles.dart';
 
 class Add extends StatefulWidget {
   const Add({Key? key}) : super(key: key);
@@ -44,7 +39,7 @@ class _AddState extends State<Add> {
             ),
             Container(
                 margin: const EdgeInsets.only(top: 300),
-                child: const Text('from wecode')),
+                child: const Text('From WeeCode')),
             Container(
               margin: const EdgeInsets.only(top: 20),
               child: Image.asset(

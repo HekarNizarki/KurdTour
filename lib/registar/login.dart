@@ -1,5 +1,4 @@
 import 'package:KurdTour/home_main/home_bottom.dart';
-import 'package:KurdTour/home_main/home_screen_main.dart';
 import 'package:KurdTour/provider/provider.dart';
 import 'package:KurdTour/registar/Signup.dart';
 import 'package:flutter/material.dart';
@@ -172,7 +171,6 @@ class _LoginFormState extends State<LoginForm> {
                       .signIn(email: email!, password: password!)
                       .then((result) {
                     if (result == null) {
-                      final String giniraluser = email.toString();
                       Navigator.pushReplacement(context,
                           MaterialPageRoute(builder: (context) => HomeMain()));
                     } else {

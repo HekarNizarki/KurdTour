@@ -1,10 +1,6 @@
-import 'package:KurdTour/data/generaluser.dart';
-import 'package:KurdTour/search_screen/serchvew.dart';
 import 'package:KurdTour/style_widget/card.dart';
 import 'package:flutter/material.dart';
 import '../locationDetiles/locationdetiles.dart';
-import '../profilescreen/profilescreen.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:KurdTour/data/location.dart';
 
@@ -16,8 +12,6 @@ class HomeMainScreen extends StatefulWidget {
 }
 
 class _HomeMainScreenState extends State<HomeMainScreen> {
-  CollectionReference _collectionRef =
-      FirebaseFirestore.instance.collection('Location');
   final _fireStore = FirebaseFirestore.instance;
 
   @override
