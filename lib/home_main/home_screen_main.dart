@@ -32,7 +32,7 @@ class _HomeMainScreenState extends State<HomeMainScreen> {
                 stream: _fireStore.collection("Location").snapshots(),
                 builder: (context, snapshot) {
                   if (!snapshot.hasData) {
-                    return LinearProgressIndicator();
+                    return const LinearProgressIndicator();
                   }
                   List<Location> _locations = snapshot.data!.docs
                       .map((e) =>
@@ -46,7 +46,7 @@ class _HomeMainScreenState extends State<HomeMainScreen> {
                           child: Padding(
                             padding: const EdgeInsets.only(left: 10, right: 10),
                             child: generalcard(
-                                image: _locations[index].image,
+                                image: _locations[index].image ,
                                 titledoc: _locations[index].title,
                                 discription: _locations[index].description,
                                 ratingnew: _locations[index].rating),

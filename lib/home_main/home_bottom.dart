@@ -30,7 +30,7 @@ class _HomeMainScreenState extends State<HomeMain> {
           bottomNavigationBar: BottomNavigationBar(
             backgroundColor: Color.fromARGB(255, 255, 156, 7),
             selectedItemColor: Colors.black,
-            unselectedItemColor: Colors.black45,
+            unselectedItemColor: Color.fromARGB(115, 63, 63, 63),
             showUnselectedLabels: true,
             iconSize: 30,
             currentIndex: carrent,
@@ -41,7 +41,7 @@ class _HomeMainScreenState extends State<HomeMain> {
                   label: 'Home',
                   backgroundColor: Color.fromARGB(255, 255, 156, 7)),
               BottomNavigationBarItem(
-                  icon: Icon(Icons.find_in_page_outlined),
+                  icon: Icon(Icons.find_in_page),
                   label: 'Search',
                   backgroundColor: Color.fromARGB(255, 255, 156, 7)),
               BottomNavigationBarItem(
