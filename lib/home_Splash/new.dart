@@ -39,7 +39,7 @@ class _AddState extends State<Add> {
             ),
             Container(
                 margin: const EdgeInsets.only(top: 300),
-                child: const Text('From WeeCode')),
+                child: const Text('From WeCode')),
             Container(
               margin: const EdgeInsets.only(top: 20),
               child: Image.asset(
