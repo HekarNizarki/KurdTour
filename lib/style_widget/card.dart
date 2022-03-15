@@ -26,12 +26,12 @@ Widget generalcard(
             child: Image.network(
               image!,
               fit: BoxFit.fill,
-              width: 180,
+              width: 160,
             ),
           ),
         ),
         SizedBox(
-          width: 170,
+          width: 150,
           child: Column(
             children: [
               Container(
@@ -42,12 +42,13 @@ Widget generalcard(
                   style: const TextStyle(
                     color: Colors.amber,
                     decorationStyle: TextDecorationStyle.wavy,
-                    fontSize: 19,
+                    fontSize: 16,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
               ),
               Container(
+                padding: EdgeInsets.only(right: 5, left: 5),
                 height: 67,
                 margin: const EdgeInsets.only(bottom: 7),
                 child: Text(

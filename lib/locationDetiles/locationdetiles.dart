@@ -54,143 +54,145 @@ class _LocationDetileViewState extends State<LocationDetileView> {
           ),
           backgroundColor: Colors.amber[500],
         ),
-        body: Container(
-            margin: EdgeInsets.only(left: 10, top: 5),
-            height: 635,
-            width: 370,
-            color: Colors.grey[200],
-            child: Column(
-              children: [
-                Container(
-                  margin: EdgeInsets.only(top: 5),
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(15),
-                    child: Image.network(
-                      widget.loc.image.toString(),
-                      fit: BoxFit.cover,
-                      height: 180,
-                      width: 355,
+        body: Center(
+          child: Container(
+              margin: EdgeInsets.only(left: 5, top: 5, right: 5),
+              height: 595,
+              width: 350,
+              color: Colors.grey[200],
+              child: Column(
+                children: [
+                  Container(
+                    margin: EdgeInsets.only(top: 5),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(15),
+                      child: Image.network(
+                        widget.loc.image.toString(),
+                        fit: BoxFit.cover,
+                        height: 180,
+                        width: 340,
+                      ),
                     ),
                   ),
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    Container(
-                      margin: EdgeInsets.only(top: 5),
-                      child: Text(
-                        widget.loc.title.toString(),
-                        textAlign: TextAlign.center,
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      Container(
+                        margin: EdgeInsets.only(top: 5),
+                        child: Text(
+                          widget.loc.title.toString(),
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            color: Colors.amber,
+                            fontSize: 22,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                      Container(
+                        margin: EdgeInsets.only(top: 5),
+                        alignment: Alignment.center,
+                        child: RatingBarIndicator(
+                          rating: widget.loc.rating!.toDouble(),
+                          itemBuilder: (context, index) => const Icon(
+                            Icons.star,
+                            color: Colors.amber,
+                          ),
+                          itemCount: 5,
+                          itemSize: 25,
+                          direction: Axis.horizontal,
+                        ),
+                      )
+                    ],
+                  ),
+                  Container(
+                    margin: EdgeInsets.only(top: 10),
+                    child: const Text('Description',
                         style: TextStyle(
-                          color: Colors.amber,
-                          fontSize: 22,
+                          fontSize: 15,
+                          fontWeight: FontWeight.bold,
+                        )),
+                  ),
+                  Container(
+                    width: 330,
+                    height: 60,
+                    margin: EdgeInsets.only(top: 10, bottom: 10),
+                    child: Text(widget.loc.description.toString(),
+                        overflow: TextOverflow.fade,
+                        textAlign: TextAlign.justify,
+                        style: const TextStyle(
+                          fontSize: 12,
+                        )),
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const Text(
+                        'Opining hours : ',
+                        style: TextStyle(
+                          fontSize: 15,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                    ),
-                    Container(
-                      margin: EdgeInsets.only(top: 5),
-                      alignment: Alignment.center,
-                      child: RatingBarIndicator(
-                        rating: widget.loc.rating!.toDouble(),
-                        itemBuilder: (context, index) => const Icon(
-                          Icons.star,
-                          color: Colors.amber,
+                      Text(
+                        widget.loc.openhourse.toString(),
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
                         ),
-                        itemCount: 5,
-                        itemSize: 25,
-                        direction: Axis.horizontal,
-                      ),
-                    )
-                  ],
-                ),
-                Container(
-                  margin: EdgeInsets.only(top: 10),
-                  child: const Text('Description',
-                      style: TextStyle(
-                        fontSize: 15,
-                        fontWeight: FontWeight.bold,
-                      )),
-                ),
-                Container(
-                  width: 330,
-                  height: 60,
-                  margin: EdgeInsets.only(top: 10, bottom: 10),
-                  child: Text(widget.loc.description.toString(),
-                      overflow: TextOverflow.fade,
-                      textAlign: TextAlign.justify,
-                      style: const TextStyle(
-                        fontSize: 12,
-                      )),
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    const Text(
-                      'Opining hours : ',
-                      style: TextStyle(
-                        fontSize: 15,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    Text(
-                      widget.loc.openhourse.toString(),
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                      ),
-                    )
-                  ],
-                ),
-                SizedBox(
-                  height: 15,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    InkWell(
-                      child: const Text(
-                        "Visit Website",
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold, color: Colors.red),
-                      ),
-                      onTap: () => {launch(widget.loc.website!)},
-                    ),
-                    InkWell(
-                      child: const Text(
-                        "Call",
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold, color: Colors.red),
-                      ),
-                      onTap: () =>
-                          {launch('tel:' + widget.loc.phone.toString())},
-                    ),
-                    InkWell(
-                      child: const Text(
-                        "Email",
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold, color: Colors.red),
-                      ),
-                      onTap: () => {launch('mailto:' + widget.loc.email!)},
-                    )
-                  ],
-                ),
-                Container(
-                  margin: EdgeInsets.only(top: 15),
-                  width: 350,
-                  height: 240,
-                  child: GoogleMap(
-                    onMapCreated: _onMapCreated,
-                    initialCameraPosition: CameraPosition(
-                      target: LatLng(widget.loc.loca!.toDouble(),
-                          widget.loc.locl!.toDouble()),
-                      zoom: 16.0,
-                    ),
-                    markers: markers.values.toSet(),
-                    myLocationButtonEnabled: true,
+                      )
+                    ],
                   ),
-                )
-              ],
-            )),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      InkWell(
+                        child: const Text(
+                          "Visit Website",
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold, color: Colors.red),
+                        ),
+                        onTap: () => {launch(widget.loc.website!)},
+                      ),
+                      InkWell(
+                        child: const Text(
+                          "Call",
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold, color: Colors.red),
+                        ),
+                        onTap: () =>
+                            {launch('tel:' + widget.loc.phone.toString())},
+                      ),
+                      InkWell(
+                        child: const Text(
+                          "Email",
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold, color: Colors.red),
+                        ),
+                        onTap: () => {launch('mailto:' + widget.loc.email!)},
+                      )
+                    ],
+                  ),
+                  Container(
+                    margin: EdgeInsets.only(top: 10),
+                    width: 340,
+                    height: 215,
+                    child: GoogleMap(
+                      onMapCreated: _onMapCreated,
+                      initialCameraPosition: CameraPosition(
+                        target: LatLng(widget.loc.loca!.toDouble(),
+                            widget.loc.locl!.toDouble()),
+                        zoom: 16.0,
+                      ),
+                      markers: markers.values.toSet(),
+                      myLocationButtonEnabled: true,
+                    ),
+                  )
+                ],
+              )),
+        ),
       ),
     );
   }
