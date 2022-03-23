@@ -1,4 +1,5 @@
 import 'package:KurdTour/style_widget/card.dart';
+import 'package:KurdTour/style_widget/smallcard.dart';
 import 'package:flutter/material.dart';
 import '../locationDetiles/locationdetiles.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -14,52 +15,189 @@ class HomeMainScreen extends StatefulWidget {
 class _HomeMainScreenState extends State<HomeMainScreen> {
   final _fireStore = FirebaseFirestore.instance;
 
+  // Initial Selected Value
+  String dropdownvalue = 'Duhok';
+
+  // List of items in our dropdown menu
+  var items = [
+    'Duhok',
+    'Erbil',
+    'Sulaimaniya',
+  ];
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        theme: ThemeData(
-            scaffoldBackgroundColor: const Color.fromARGB(255, 255, 255, 255)),
-        home: Scaffold(
-          appBar: AppBar(
-            title: const Text(
-              'Most important location',
-              style: TextStyle(color: Colors.black),
-            ),
-            backgroundColor: Colors.amber[500],
+      theme: ThemeData(
+          scaffoldBackgroundColor: const Color.fromARGB(255, 255, 255, 255)),
+      home: Scaffold(
+        appBar: AppBar(
+          title: const Text(
+            'Most important location',
+            style: TextStyle(color: Colors.black),
           ),
-          body: Center(
-            child: StreamBuilder<QuerySnapshot>(
-                stream: _fireStore.collection("Location").snapshots(),
-                builder: (context, snapshot) {
-                  if (!snapshot.hasData) {
-                    return const LinearProgressIndicator();
-                  }
-                  List<Location> _locations = snapshot.data!.docs
-                      .map((e) =>
-                          Location.fromMap(e.data() as Map<String, dynamic>))
-                      .toList();
+          backgroundColor: Colors.amber[500],
+        ),
+        body: Center(
+          child: Column(
+            children: [
+              Container(
+                  margin: EdgeInsets.only(top: 10, bottom: 10),
+                  child: const Text(
+                    'Most Imported location in kurdistan',
+                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                  )),
+              Expanded(
+                child: StreamBuilder<QuerySnapshot>(
+                    stream: _fireStore
+                        .collection("Location")
+                        .orderBy('rating', descending: true)
+                        .limit(10)
+                        .snapshots(),
+                    builder: (context, snapshot) {
+                      if (!snapshot.hasData) {
+                        return const LinearProgressIndicator();
+                      }
+                      List<Location> _locations = snapshot.data!.docs
+                          .map((e) => Location.fromMap(
+                              e.data() as Map<String, dynamic>))
+                          .toList();
 
-                  return ListView.builder(
-                      itemCount: _locations.length,
-                      itemBuilder: (context, index) {
-                        return InkWell(
-                          child: Padding(
-                            padding: const EdgeInsets.only(left: 10, right: 10),
-                            child: generalcard(
-                                image: _locations[index].image ,
-                                titledoc: _locations[index].title,
-                                discription: _locations[index].description,
-                                ratingnew: _locations[index].rating),
-                          ),
-                          onTap: () => Navigator.of(context).push(
-                              MaterialPageRoute(
-                                  builder: (context) => LocationDetileView(
-                                      loc: _locations[index]))),
-                        );
-                      });
-                }),
+                      return ListView.builder(
+                          scrollDirection: Axis.horizontal,
+                          itemCount: _locations.length,
+                          itemBuilder: (context, index) {
+                            return InkWell(
+                              child: Container(
+                                margin: EdgeInsets.all(5),
+                                child: smallcard(
+                                    image: _locations[index].image,
+                                    titledoc: _locations[index].title,
+                                    ratingnew: _locations[index].rating),
+                              ),
+                              onTap: () => Navigator.of(context).push(
+                                  MaterialPageRoute(
+                                      builder: (context) => LocationDetileView(
+                                          loc: _locations[index]))),
+                            );
+                          });
+                    }),
+              ),
+              Container(
+                  margin: EdgeInsets.only(top: 10, bottom: 10),
+                  child: Center(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const Text(
+                          'Most Imported location in   ',
+                          style: TextStyle(
+                              fontSize: 16, fontWeight: FontWeight.bold),
+                        ),
+                        DropdownButton(
+                          // Initial Value
+                          value: dropdownvalue,
+                          // Down Arrow Icon
+                          icon: const Icon(Icons.keyboard_arrow_down),
+                          // Array list of items
+                          items: items.map((String items) {
+                            return DropdownMenuItem(
+                              value: items,
+                              child: Text(items),
+                            );
+                          }).toList(),
+                          // After selecting the desired option,it will
+                          // change button value to selected value
+                          onChanged: (String? newValue) {
+                            setState(() {
+                              dropdownvalue = newValue!;
+                            });
+                          },
+                        ),
+                      ],
+                    ),
+                  )),
+              Expanded(
+                child: StreamBuilder<QuerySnapshot>(
+                    stream: _fireStore
+                        .collection("Location")
+                        .where('locationname', isEqualTo: dropdownvalue)
+                        .limit(10)
+                        .snapshots(),
+                    builder: (context, snapshot) {
+                      if (!snapshot.hasData) {
+                        return const LinearProgressIndicator();
+                      }
+                      List<Location> _locations = snapshot.data!.docs
+                          .map((e) => Location.fromMap(
+                              e.data() as Map<String, dynamic>))
+                          .toList();
+
+                      return ListView.builder(
+                          scrollDirection: Axis.horizontal,
+                          itemCount: _locations.length,
+                          itemBuilder: (context, index) {
+                            return InkWell(
+                              child: Container(
+                                margin: EdgeInsets.all(5),
+                                child: smallcard(
+                                    image: _locations[index].image,
+                                    titledoc: _locations[index].title,
+                                    ratingnew: _locations[index].rating),
+                              ),
+                              onTap: () => Navigator.of(context).push(
+                                  MaterialPageRoute(
+                                      builder: (context) => LocationDetileView(
+                                          loc: _locations[index]))),
+                            );
+                          });
+                    }),
+              ),
+              Container(
+                  margin: EdgeInsets.only(top: 10, bottom: 10),
+                  child: const Text(
+                    'All location in kurdistan',
+                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                  )),
+              Expanded(
+                flex: 2,
+                child: StreamBuilder<QuerySnapshot>(
+                    stream: _fireStore.collection("Location").snapshots(),
+                    builder: (context, snapshot) {
+                      if (!snapshot.hasData) {
+                        return const LinearProgressIndicator();
+                      }
+                      List<Location> _locations = snapshot.data!.docs
+                          .map((e) => Location.fromMap(
+                              e.data() as Map<String, dynamic>))
+                          .toList();
+
+                      return ListView.builder(
+                          itemCount: _locations.length,
+                          itemBuilder: (context, index) {
+                            return InkWell(
+                              child: Padding(
+                                padding:
+                                    const EdgeInsets.only(left: 10, right: 10),
+                                child: generalcard(
+                                    image: _locations[index].image,
+                                    titledoc: _locations[index].title,
+                                    discription: _locations[index].description,
+                                    ratingnew: _locations[index].rating),
+                              ),
+                              onTap: () => Navigator.of(context).push(
+                                  MaterialPageRoute(
+                                      builder: (context) => LocationDetileView(
+                                          loc: _locations[index]))),
+                            );
+                          });
+                    }),
+              ),
+            ],
           ),
-        ));
+        ),
+      ),
+    );
   }
 
   void _onPressed() {
@@ -73,6 +211,7 @@ class _HomeMainScreenState extends State<HomeMainScreen> {
       'locl': 22,
       'openhourse': "10:30 12:30",
       'rating': 1,
+      'locationname': 'locationname',
       'title': "duhok mall",
       'website': "www.com"
     }).then((value) {

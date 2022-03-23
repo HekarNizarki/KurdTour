@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-
 class Location {
   String? lid;
   String? image;
@@ -8,6 +7,7 @@ class Location {
   String? description;
   double? rating;
   String? openhourse;
+  String? locationname;
   String? website;
   String? email;
   double? phone;
@@ -19,6 +19,7 @@ class Location {
     this.title,
     this.description,
     this.rating,
+    this.locationname,
     this.openhourse,
     this.website,
     this.email,
@@ -34,6 +35,7 @@ class Location {
     String? description,
     double? rating,
     String? openhourse,
+    String? locationname,
     String? website,
     String? email,
     double? phone,
@@ -47,6 +49,7 @@ class Location {
       description: description ?? this.description,
       rating: rating ?? this.rating,
       openhourse: openhourse ?? this.openhourse,
+      locationname: locationname ?? this.locationname,
       website: website ?? this.website,
       email: email ?? this.email,
       phone: phone ?? this.phone,
@@ -63,6 +66,7 @@ class Location {
       'description': description,
       'rating': rating,
       'openhourse': openhourse,
+      'locationname': locationname,
       'website': website,
       'email': email,
       'phone': phone,
@@ -79,6 +83,7 @@ class Location {
       description: map['description'],
       rating: map['rating']?.toDouble(),
       openhourse: map['openhourse'],
+      locationname: map['locationname'],
       website: map['website'],
       email: map['email'],
       phone: map['phone']?.toDouble(),
@@ -94,7 +99,7 @@ class Location {
 
   @override
   String toString() {
-    return 'Location(lid: $lid, image: $image, title: $title, description: $description, rating: $rating, openhourse: $openhourse, website: $website, email: $email, phone: $phone, locl: $locl, loca: $loca)';
+    return 'Location(lid: $lid, image: $image, locationname :$locationname,title: $title, description: $description, rating: $rating, openhourse: $openhourse, website: $website, email: $email, phone: $phone, locl: $locl, loca: $loca)';
   }
 
   @override
@@ -108,6 +113,7 @@ class Location {
         other.description == description &&
         other.rating == rating &&
         other.openhourse == openhourse &&
+        other.locationname == locationname &&
         other.website == website &&
         other.email == email &&
         other.phone == phone &&
@@ -124,6 +130,7 @@ class Location {
         rating.hashCode ^
         openhourse.hashCode ^
         website.hashCode ^
+        locationname.hashCode ^
         email.hashCode ^
         phone.hashCode ^
         locl.hashCode ^
