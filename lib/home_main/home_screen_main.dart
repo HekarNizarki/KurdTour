@@ -103,7 +103,10 @@ class _HomeMainScreenState extends State<HomeMainScreen> {
                           items: items.map((String items) {
                             return DropdownMenuItem(
                               value: items,
-                              child: Text(items),
+                              child: Text(items,
+                                  style: TextStyle(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.bold)),
                             );
                           }).toList(),
                           // After selecting the desired option,it will
@@ -156,7 +159,7 @@ class _HomeMainScreenState extends State<HomeMainScreen> {
               Container(
                   margin: EdgeInsets.only(top: 10, bottom: 10),
                   child: const Text(
-                    'All location in kurdistan',
+                    'All locations',
                     style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                   )),
               Expanded(
