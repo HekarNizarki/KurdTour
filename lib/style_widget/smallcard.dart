@@ -18,8 +18,8 @@ Widget smallcard({String? image, String? titledoc, double? ratingnew}) {
             child: Image.network(
               image!,
               fit: BoxFit.fill,
-              width: 85,
-              height: 70,
+              width: 80,
+              height: 65,
             ),
           ),
         ),

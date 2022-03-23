@@ -47,7 +47,7 @@ class _SerachScreenState extends State<SerachScreen> {
                   });
                 },
                 decoration: const InputDecoration(
-                  prefixIcon: Icon(Icons.email_outlined),
+                  prefixIcon: Icon(Icons.search),
                   labelText: "Location Name",
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.all(
