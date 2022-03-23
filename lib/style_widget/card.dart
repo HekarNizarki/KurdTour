@@ -18,7 +18,7 @@ Widget generalcard(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Container(
-          width: 180,
+          width: 200,
           height: 140,
           padding: const EdgeInsets.only(left: 7, right: 7, bottom: 5, top: 5),
           child: ClipRRect(
@@ -26,7 +26,7 @@ Widget generalcard(
             child: Image.network(
               image!,
               fit: BoxFit.fill,
-              width: 160,
+              width: 200,
             ),
           ),
         ),
